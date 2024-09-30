@@ -1,0 +1,95 @@
+# Survey Data Visualization
+# Description: This script provides functions to visualize survey data using seaborn and matplotlib.
+# It includes methods for plotting distributions, correlation matrices, and relationships between variables.
+# Users can easily modify column names and customize plots as needed.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the cleaned dataset (replace 'your_cleaned_survey_data.csv' with your own file)
+data_clean = pd.read_csv('your_cleaned_survey_data.csv')
+
+# Function to create distribution plots for a specified column
+def plot_distribution(data, column, title, xlabel, ylabel):
+    """
+    Creates a countplot to show the distribution of responses for a given column.
+
+    Parameters:
+    data (DataFrame): The dataset containing the column to plot.
+    column (str): The column name to visualize.
+    title (str): Title of the plot.
+    xlabel (str): X-axis label.
+    ylabel (str): Y-axis label.
+    """
+    plt.figure(figsize=(8, 6))
+    sns.countplot(x=column, data=data, palette="Set2", hue=column, dodge=False)
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.xticks(rotation=45)
+    plt.tight_layout()  # Ensure the layout is adjusted to avoid overlap
+    plt.legend(title=column, bbox_to_anchor=(1.05, 1), loc='upper left')  # Optional: add legend
+    plt.show()
+
+# Function to plot a correlation matrix for a given set of columns
+def plot_correlation_matrix(data, title):
+    """
+    Creates a heatmap to show correlations between variables.
+
+    Parameters:
+    data (DataFrame): The dataset containing the variables to correlate.
+    title (str): Title of the plot.
+    """
+    plt.figure(figsize=(10, 8))
+    correlation_matrix = data.corr()
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title(title)
+    plt.tight_layout()
+    plt.show()
+
+# Function to visualize the relationship between two variables
+def plot_relationship(x, y, title, xlabel, ylabel):
+    """
+    Creates a scatter plot with a regression line to show the relationship between two variables.
+
+    Parameters:
+    x (str): The column name of the X-axis variable.
+    y (str): The column name of the Y-axis variable.
+    title (str): Title of the plot.
+    xlabel (str): X-axis label.
+    ylabel (str): Y-axis label.
+    """
+    plt.figure(figsize=(8, 6))
+    sns.regplot(x=x, y=y, data=data_clean, color="g")
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.tight_layout()
+    plt.show()
+
+# Example Visualizations
+# Replace 'ColumnName' with your actual column names from the dataset
+
+# Visualization 1: Distribution of a Categorical Column (replace 'ColumnName' with a categorical column)
+plot_distribution(data_clean, 'ColumnName', 'Distribution of Responses for ColumnName', 'Response Options', 'Frequency')
+
+# Visualization 2: Correlation Matrix of Key Variables
+# Replace with relevant columns from your dataset
+plot_correlation_matrix(data_clean[['Column1', 'Column2', 'Column3', 'Column4']], 'Correlation Matrix of Selected Variables')
+
+# Visualization 3: Relationship between Two Variables (replace 'Column1' and 'Column2')
+plot_relationship('Column1', 'Column2', 'Relationship between Column1 and Column2', 'Column1', 'Column2')
+
+# Additional Visualizations: Uncomment and modify for more visualizations
+
+# Visualization 4: Relationship between another set of variables
+# plot_relationship('Column3', 'Column4', 'Relationship between Column3 and Column4', 'Column3', 'Column4')
+
+# Visualization 5: Distribution of another Categorical Column
+# plot_distribution(data_clean, 'AnotherColumnName', 'Distribution of AnotherColumnName', 'Response Options', 'Frequency')
+
+# Visualization 6: Yet Another Relationship Plot
+# plot_relationship('Column5', 'Column6', 'Relationship between Column5 and Column6', 'Column5', 'Column6')
+
+# END
