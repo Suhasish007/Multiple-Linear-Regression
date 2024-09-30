@@ -28,14 +28,6 @@ To run these scripts, ensure you have the following:
 - Python 3.x
 - Required libraries such as `pandas`, `numpy`, `statsmodels`, `matplotlib`, and `seaborn`.
 
-### Installation
-
-1. **Download or clone** the repository to your local machine.
-2. **Install the necessary libraries** using:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
 ### Usage Instructions
 
 1. **Running the Analysis Script**:
