@@ -1,0 +1,79 @@
+# Survey Data Analysis Using Multiple Linear Regression (MLR)
+# Description: This script performs MLR on a given dataset after preprocessing it by mapping categorical variables to numerical values and cleaning the data. 
+# Users can modify the mappings, dependent variables, and independent variables as needed.
+
+import pandas as pd
+import statsmodels.api as sm
+
+# Load the dataset (replace 'your_survey_dataset.csv' with your own file)
+data = pd.read_csv('your_survey_dataset.csv')
+
+# Step 1: Create text-to-numeric mappings for relevant columns
+# Customize these mappings based on your survey questions and responses
+
+# Example of text-to-numeric mapping
+# Replace 'Column1' with your own column name
+# data['Column1'] = data['Column1'].map({
+#     'Option 1': 1,
+#     'Option 2': 2,
+#     'Option 3': 3,
+#     'Option 4': 4
+# })
+
+# Repeat similar mappings for other columns as required
+# Uncomment and modify the lines below for your specific columns
+# data['Column2'] = data['Column2'].map({...})
+# data['Column3'] = data['Column3'].map({...})
+# Continue for other columns...
+
+# Step 2: Handle missing or infinite data by dropping rows with NaNs or inf
+# Clean the data before running MLR
+data_clean = data.dropna()  # Drop rows with NaN values
+data_clean = data_clean[~data_clean.isin([float('inf'), float('-inf')]).any(axis=1)]  # Drop rows with inf/-inf
+
+# Function to perform Multiple Linear Regression (MLR)
+def run_mlr(dependent_var, independent_vars, data):
+    """
+    Performs Multiple Linear Regression (MLR) using the specified dependent and independent variables.
+    
+    Parameters:
+    dependent_var (str): The column name of the dependent variable.
+    independent_vars (list): A list of column names for the independent variables.
+    data (DataFrame): The dataset containing the variables.
+    
+    Returns:
+    model: The fitted OLS model.
+    """
+    X = data[independent_vars]  # Independent variables
+    y = data[dependent_var]  # Dependent variable
+    X = sm.add_constant(X)  # Add constant to the model
+    model = sm.OLS(y, X).fit()  # Fit the model
+    
+    # Print results and summary
+    print(f"\nResults for {dependent_var} with independent variables {independent_vars}")
+    print(f"F-test: F-value = {model.fvalue:.4f}, p-value = {model.f_pvalue:.4f}")
+    print(model.summary())  # Show model summary
+    return model
+
+# Example pathways for MLR analysis (customize based on your dataset)
+# Replace 'Dependent_Var' and 'Independent_Var' with your own column names
+
+# Pathway 1: Predicting Outcome based on Set of Factors
+dependent_var_1 = 'Dependent_Var1'  # Replace with your dependent variable
+independent_vars_1 = ['Independent_Var1', 'Independent_Var2', 'Independent_Var3']  # Replace with your independent variables
+model_1 = run_mlr(dependent_var_1, independent_vars_1, data_clean)
+
+# Pathway 2: Predicting a Different Outcome
+dependent_var_2 = 'Dependent_Var2'
+independent_vars_2 = ['Independent_Var4', 'Independent_Var5', 'Independent_Var6']
+model_2 = run_mlr(dependent_var_2, independent_vars_2, data_clean)
+
+# Pathway 3: Yet Another Pathway
+dependent_var_3 = 'Dependent_Var3'
+independent_vars_3 = ['Independent_Var7', 'Independent_Var8', 'Independent_Var9']
+model_3 = run_mlr(dependent_var_3, independent_vars_3, data_clean)
+
+# Export the cleaned dataset for reference or further analysis
+data_clean.to_csv('mlr_cleaned_survey_data.csv', index=False)
+
+# END OF SCRIPT
