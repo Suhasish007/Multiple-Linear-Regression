@@ -7,7 +7,7 @@ This repository provides a complete framework for analyzing and visualizing surv
 1. Performs MLR on survey data to explore relationships between different variables.
 2. Creates clear and insightful visualizations of the MLR results, including distribution plots and correlation matrices.
 
-The program is customizable and can be adapted for any survey data across industries, making it suitable for various research or organizational purposes.
+The program is customizable and can be adapted for any survey data across industries, making it suitable for various research purposes.
 
 ## Features
 
