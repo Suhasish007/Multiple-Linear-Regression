@@ -1,5 +1,5 @@
 # Survey Data Analysis Using Multiple Linear Regression (MLR)
-# Description: This script performs MLR on a given dataset after preprocessing it by mapping categorical variables to numerical values and cleaning the data. 
+# Description: This performs MLR on a given dataset after preprocessing it by mapping categorical variables to numerical values and cleaning the data. 
 # Users can modify the mappings, dependent variables, and independent variables as needed.
 
 import pandas as pd
@@ -76,4 +76,4 @@ model_3 = run_mlr(dependent_var_3, independent_vars_3, data_clean)
 # Export the cleaned dataset for reference or further analysis
 data_clean.to_csv('mlr_cleaned_survey_data.csv', index=False)
 
-# END OF SCRIPT
+# END
